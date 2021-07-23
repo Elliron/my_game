@@ -8,6 +8,7 @@ from sprites import *
 from ground import *
 from button import *
 from attacks import *
+from magic import *
 
 
 # main game class
@@ -25,6 +26,7 @@ class Game:
         self.barrier_spritesheet = Spritesheet('img/tiles-map.png')
         self.enemy_spritesheet = Spritesheet('img/roguelikecreatures.png')
         self.attack_spritesheet = Spritesheet('img/attack.png')
+        self.magic_spritesheet = Spritesheet('img/fireball_0.png')
         self.intro_background = pygame.image.load('img/tiles-map.png')
         self.go_background = pygame.image.load('img/tiles-map.png')
 
@@ -39,12 +41,14 @@ class Game:
                 if column == "P":
                     self.player = Player(self, j, i)
 
+
     def intro_screen(self):
         intro = True
 
         title = self.font.render('My Game', True, RED)
         title_rect = title.get_rect(x=200,y=10)
         play_button = Button(25,550,100,50, RED, BLACK, 'Play', 32)
+
 
         while intro:
             for event in pygame.event.get():
@@ -73,6 +77,7 @@ class Game:
         self.barrier = pygame.sprite.LayeredUpdates()
         self.enemies = pygame.sprite.LayeredUpdates()
         self.attacks = pygame.sprite.LayeredUpdates()
+        self.magic = pygame.sprite.LayeredUpdates()
         self.player_barrier = pygame.sprite.LayeredUpdates()
 
         self.create_tile_map()
@@ -93,6 +98,18 @@ class Game:
                         Attack(self, self.player.rect.x - TILESIZE, self.player.rect.y)
                     if self.player.facing == 'right':
                         Attack(self, self.player.rect.x + TILESIZE, self.player.rect.y)
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    if self.player.facing == 'up':
+                        Magic(self, self.player.rect.x, self.player.rect.y - TILESIZE)
+                    if self.player.facing == 'down':
+                        Magic(self, self.player.rect.x, self.player.rect.y + TILESIZE)
+                    if self.player.facing == 'left':
+                        Magic(self, self.player.rect.x - TILESIZE, self.player.rect.y)
+                    if self.player.facing == 'right':
+                        Magic(self, self.player.rect.x + TILESIZE, self.player.rect.y)
+
 
     def update(self):
         self.all_sprites.update()
