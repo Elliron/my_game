@@ -37,13 +37,11 @@ class Enemy(pygame.sprite.Sprite):
         self.basic_health()
 
         self.rect.x += self.x_change
-        self.collide_barrier('x')
-        # self.collide_player('x')
-        # self.collide_attacks('x')
+        self.collide_attacks('x')
+        self.collide_player('x')
         self.rect.y += self.y_change
-        self.collide_barrier('y')
-        # self.collide_player('y')
-        # self.collide_attacks('y')
+        self.collide_attacks('y')
+        self.collide_player('y')
         self.x_change = 0
         self.y_change = 0
 
@@ -60,59 +58,15 @@ class Enemy(pygame.sprite.Sprite):
             if self.movement_loop >= self.maximum_travel:
                 self.facing = 'left'
 
-    # def collide_attacks(self, direction):
-    #     if direction == "x":
-    #         hits = pygame.sprite.spritecollide(self, self.game.attacks, False)
-    #         if hits:
-    #             if self.x_change > 0:
-    #                 for sprite in self.game.enemies:
-    #                     sprite.rect.x += ENEMY_SPEED
-    #                 self.rect.x = hits[0].rect.left - self.rect.width
-    #             if self.x_change < 0:
-    #                 for sprite in self.game.enemies:
-    #                     sprite.rect.x -= ENEMY_SPEED
-    #                 self.rect.x = hits[0].rect.right
+    def collide_attacks(self, direction):
+        hits = pygame.sprite.spritecollide(self, self.game.attacks, False)
+        if hits:
+            self.get_damage(PLAYER_DAMAGE)
 
-    #     if direction == 'y':
-    #         hits = pygame.sprite.spritecollide(self, self.game.attacks, False)
-    #         if hits:
-    #             if self.y_change > 0:
-    #                 for sprite in self.game.enemies:
-    #                     sprite.rect.y += ENEMY_SPEED
-    #                 self.rect.y = hits[0].rect.top - self.rect.height
-    #             if self.y_change < 0:
-    #                 for sprite in self.game.enemies:
-    #                     sprite.rect.y -= ENEMY_SPEED
-    #                 self.rect.y = hits[0].rect.bottom
 
-    # def collide_player(self, direction):
-    #     if direction == "x":
-    #         hits = pygame.sprite.spritecollide(self, self.game.players, False)
-    #         if hits:
-    #             if self.x_change > 0:
-    #                 for sprite in self.game.enemies:
-    #                     sprite.rect.x += ENEMY_SPEED
-    #                 self.rect.x = hits[0].rect.left - self.rect.width
-    #             if self.x_change < 0:
-    #                 for sprite in self.game.enemies:
-    #                     sprite.rect.x -= ENEMY_SPEED
-    #                 self.rect.x = hits[0].rect.right
-
-    #     if direction == 'y':
-    #         hits = pygame.sprite.spritecollide(self, self.game.players, False)
-    #         if hits:
-    #             if self.y_change > 0:
-    #                 for sprite in self.game.enemies:
-    #                     sprite.rect.y += ENEMY_SPEED
-    #                 self.rect.y = hits[0].rect.top - self.rect.height
-    #             if self.y_change < 0:
-    #                 for sprite in self.game.enemies:
-    #                     sprite.rect.y -= ENEMY_SPEED
-    #                 self.rect.y = hits[0].rect.bottom
-    
-    def collide_barrier(self, direction):
+    def collide_player(self, direction):
         if direction == "x":
-            hits = pygame.sprite.spritecollide(self, self.game.barrier, False)
+            hits = pygame.sprite.spritecollide(self, self.game.player_barrier, False)
             if hits:
                 if self.x_change > 0:
                     for sprite in self.game.enemies:
@@ -124,7 +78,7 @@ class Enemy(pygame.sprite.Sprite):
                     self.rect.x = hits[0].rect.right
 
         if direction == 'y':
-            hits = pygame.sprite.spritecollide(self, self.game.barrier, False)
+            hits = pygame.sprite.spritecollide(self, self.game.player_barrier, False)
             if hits:
                 if self.y_change > 0:
                     for sprite in self.game.enemies:
@@ -141,7 +95,6 @@ class Enemy(pygame.sprite.Sprite):
         if self.current_health <= 0:
             self.current_health = 0
             self.kill()
-            self.game.playing = False
 
     def get_health(self, amount):
         if self.current_health < self.max_health:

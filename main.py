@@ -37,7 +37,7 @@ class Game:
                 if column == "E":
                     Enemy(self, j, i)
                 if column == "P":
-                    Player(self, j, i)
+                    self.player = Player(self, j, i)
 
     def intro_screen(self):
         intro = True
@@ -73,7 +73,7 @@ class Game:
         self.barrier = pygame.sprite.LayeredUpdates()
         self.enemies = pygame.sprite.LayeredUpdates()
         self.attacks = pygame.sprite.LayeredUpdates()
-        # self.players = pygame.sprite.LayeredUpdates()
+        self.player_barrier = pygame.sprite.LayeredUpdates()
 
         self.create_tile_map()
 

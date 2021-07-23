@@ -8,7 +8,7 @@ class Attack(pygame.sprite.Sprite):
 
         self.game = game
         self._layer = PLAYER_LAYER
-        self.groups = self.game.all_sprites, self.game.attacks
+        self.groups = self.game.all_sprites, self.game.attacks, self.game.player_barrier
         pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x
@@ -27,7 +27,6 @@ class Attack(pygame.sprite.Sprite):
         self.animate()
         self.collide()
 
-        # where the attack collides, passes in the attack, the enemies and if True kills the enemy
     def collide(self):
         hits = pygame.sprite.spritecollide(self, self.game.enemies, False)
 
