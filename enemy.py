@@ -38,11 +38,11 @@ class Enemy(pygame.sprite.Sprite):
 
         self.rect.x += self.x_change
         self.collide_barrier('x')
-        self.collide_player('x')
+        # self.collide_player('x')
         # self.collide_attacks('x')
         self.rect.y += self.y_change
         self.collide_barrier('y')
-        self.collide_player('y')
+        # self.collide_player('y')
         # self.collide_attacks('y')
         self.x_change = 0
         self.y_change = 0
@@ -85,30 +85,30 @@ class Enemy(pygame.sprite.Sprite):
     #                     sprite.rect.y -= ENEMY_SPEED
     #                 self.rect.y = hits[0].rect.bottom
 
-    def collide_player(self, direction):
-        if direction == "x":
-            hits = pygame.sprite.spritecollide(self, self.game.players, False)
-            if hits:
-                if self.x_change > 0:
-                    for sprite in self.game.enemies:
-                        sprite.rect.x += ENEMY_SPEED
-                    self.rect.x = hits[0].rect.left - self.rect.width
-                if self.x_change < 0:
-                    for sprite in self.game.enemies:
-                        sprite.rect.x -= ENEMY_SPEED
-                    self.rect.x = hits[0].rect.right
+    # def collide_player(self, direction):
+    #     if direction == "x":
+    #         hits = pygame.sprite.spritecollide(self, self.game.players, False)
+    #         if hits:
+    #             if self.x_change > 0:
+    #                 for sprite in self.game.enemies:
+    #                     sprite.rect.x += ENEMY_SPEED
+    #                 self.rect.x = hits[0].rect.left - self.rect.width
+    #             if self.x_change < 0:
+    #                 for sprite in self.game.enemies:
+    #                     sprite.rect.x -= ENEMY_SPEED
+    #                 self.rect.x = hits[0].rect.right
 
-        if direction == 'y':
-            hits = pygame.sprite.spritecollide(self, self.game.players, False)
-            if hits:
-                if self.y_change > 0:
-                    for sprite in self.game.enemies:
-                        sprite.rect.y += ENEMY_SPEED
-                    self.rect.y = hits[0].rect.top - self.rect.height
-                if self.y_change < 0:
-                    for sprite in self.game.enemies:
-                        sprite.rect.y -= ENEMY_SPEED
-                    self.rect.y = hits[0].rect.bottom
+    #     if direction == 'y':
+    #         hits = pygame.sprite.spritecollide(self, self.game.players, False)
+    #         if hits:
+    #             if self.y_change > 0:
+    #                 for sprite in self.game.enemies:
+    #                     sprite.rect.y += ENEMY_SPEED
+    #                 self.rect.y = hits[0].rect.top - self.rect.height
+    #             if self.y_change < 0:
+    #                 for sprite in self.game.enemies:
+    #                     sprite.rect.y -= ENEMY_SPEED
+    #                 self.rect.y = hits[0].rect.bottom
     
     def collide_barrier(self, direction):
         if direction == "x":
