@@ -39,9 +39,11 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.x += self.x_change
         self.collide_attacks('x')
         self.collide_player('x')
+        self.collide_magic('x')
         self.rect.y += self.y_change
         self.collide_attacks('y')
         self.collide_player('y')
+        self.collide_magic('y')
         self.x_change = 0
         self.y_change = 0
 
@@ -63,6 +65,10 @@ class Enemy(pygame.sprite.Sprite):
         if hits:
             self.get_damage(PLAYER_DAMAGE)
 
+    def collide_magic(self, direction):
+        hits = pygame.sprite.spritecollide(self, self.game.magic, False)
+        if hits:
+            self.get_damage(MAGIC_DAMAGE)
 
     def collide_player(self, direction):
         if direction == "x":

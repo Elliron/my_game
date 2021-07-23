@@ -20,20 +20,23 @@ PLAYER_LAYER = 3
 ENEMY_LAYER = 3
 BARRIER_LAYER = 2
 GROUND_LAYER = 1
+MENU_BAR_LAYER = 3
 
 # health
 PLAYER_CURRENT_HEALTH = 100
 PLAYER_MAX_HEALTH = 100
-ENEMY_CURRENT_HEALTH = 1000
-ENEMY_MAX_HEALTH = 1000
+ENEMY_CURRENT_HEALTH = 100
+ENEMY_MAX_HEALTH = 100
 
 # damage
 PLAYER_DAMAGE = 10
+MAGIC_DAMAGE = 25
 ENEMY_DAMAGE = 1
 
 # sprite speed
 PLAYER_SPEED = 3
 ENEMY_SPEED = 2
+MAGIC_SPEED = 1
 
 tilemap = [
     'BBBBBBBBBBBBBBBBBBBB',
@@ -49,6 +52,6 @@ tilemap = [
     'B..................B',
     'B...BB.............B',
     'B..................B',
-    'B..................B',
+    'B...C..............B',
     'BBBBBBBBBBBBBBBBBBBB',
 ]
