@@ -19,3 +19,4 @@ Health Bars
 
 - use arrow keys to move
 - spacebar to attack
+- 1 key for fireball
