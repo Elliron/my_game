@@ -10,3 +10,8 @@ Health Bars
 # to run
 - download dependencies/pygame
 - run main.py with python or python3
+
+# play
+
+- use arrow keys to move
+- spacebar to attack
